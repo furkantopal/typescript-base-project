@@ -1,8 +1,13 @@
 import { Rover } from '../main/rover';
 
+const grid = {
+  X: 100,
+  Y: 100,
+};
+
 describe('Rover', () => {
   it.each([[['X1', 'Y2', 'DN']], [['X2', 'Y3', 'DN']]])('should return initial location %s', (initialLocation) => {
-    const rover = new Rover(initialLocation);
+    const rover = new Rover(grid, initialLocation);
     expect(rover.getLocation()).toEqual(initialLocation);
   });
 
@@ -28,7 +33,7 @@ describe('Rover', () => {
       finalLocation: ['X1', 'Y2', 'DN'],
     },
   ])('should turn left', ({ initialLocation, command, finalLocation }) => {
-    const rover = new Rover(initialLocation);
+    const rover = new Rover(grid, initialLocation);
     rover.execute(command);
     const roverLocation = rover.getLocation();
 
@@ -57,7 +62,7 @@ describe('Rover', () => {
       finalLocation: ['X1', 'Y2', 'DN'],
     },
   ])('should turn right', ({ initialLocation, command, finalLocation }) => {
-    const rover = new Rover(initialLocation);
+    const rover = new Rover(grid, initialLocation);
     rover.execute(command);
     const roverLocation = rover.getLocation();
 
@@ -126,7 +131,7 @@ describe('Rover', () => {
       finalLocation: ['X99', 'Y1', 'DW'],
     },
   ])('should move forward', ({ initialLocation, command, finalLocation }) => {
-    const rover = new Rover(initialLocation);
+    const rover = new Rover(grid, initialLocation);
     rover.execute(command);
     const roverLocation = rover.getLocation();
 
@@ -134,7 +139,7 @@ describe('Rover', () => {
   });
 
   it('should throw error when the input command is invalid', () => {
-    const rover = new Rover(['X1', 'Y2', 'DN']);
+    const rover = new Rover(grid, ['X1', 'Y2', 'DN']);
     expect(() => rover.execute(['M9', '1L', '2F', '3L', '4F', '5U', '6F', '7L', '8F', '9F'])).toThrowError(`Command 5U does not supported`);
   });
 });

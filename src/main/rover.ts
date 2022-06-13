@@ -1,18 +1,26 @@
+import { Compass, Direction } from './enums/enums';
+import { Coordinate, Location } from './types/customTypes';
+
 export class Rover {
   location: Location = {
-    X: 0,
-    Y: 0,
-    D: 'N',
+    coordinate: {
+      X: 0,
+      Y: 0,
+    },
+    direction: 'N',
   };
 
-  constructor(initialLocation: string[]) {
-    this.location.X = parseInt(initialLocation[0].charAt(1).concat(initialLocation[0].charAt(2) ?? ''));
-    this.location.Y = parseInt(initialLocation[1].charAt(1).concat(initialLocation[1].charAt(2) ?? ''));
-    this.location.D = initialLocation[2].charAt(1);
+  grid: Coordinate;
+
+  constructor(grid: Coordinate, initialLocation: string[]) {
+    this.grid = grid;
+    this.location.coordinate.X = parseInt(initialLocation[0].charAt(1).concat(initialLocation[0].charAt(2) ?? ''));
+    this.location.coordinate.Y = parseInt(initialLocation[1].charAt(1).concat(initialLocation[1].charAt(2) ?? ''));
+    this.location.direction = initialLocation[2].charAt(1);
   }
 
   getLocation = (): string[] => {
-    return [`X${String(this.location.X)}`, `Y${String(this.location.Y)}`, `D${this.location.D}`];
+    return [`X${String(this.location.coordinate.X)}`, `Y${String(this.location.coordinate.Y)}`, `D${this.location.direction}`];
   };
   execute = (inputs: string[]): void => {
     inputs.forEach((input) => {
@@ -39,78 +47,72 @@ export class Rover {
   };
 
   turnLeft = (): void => {
-    if (this.location.D === 'N') {
-      this.location.D = 'W';
+    if (this.location.direction === Compass.NORTH) {
+      this.location.direction = Direction.LEFT_FROM_NORTH;
       return;
     }
-    if (this.location.D === 'E') {
-      this.location.D = 'N';
+    if (this.location.direction === Compass.EAST) {
+      this.location.direction = Direction.LEFT_FROM_EAST;
       return;
     }
-    if (this.location.D === 'S') {
-      this.location.D = 'E';
+    if (this.location.direction === Compass.SOUTH) {
+      this.location.direction = Direction.LEFT_FROM_SOUTH;
       return;
     }
-    if (this.location.D === 'W') {
-      this.location.D = 'S';
+    if (this.location.direction === Compass.WEST) {
+      this.location.direction = Direction.LEFT_FROM_WEST;
       return;
     }
   };
 
   turnRight = () => {
-    if (this.location.D === 'N') {
-      this.location.D = 'E';
+    if (this.location.direction === Compass.NORTH) {
+      this.location.direction = Direction.RIGHT_FROM_NORTH;
       return;
     }
-    if (this.location.D === 'E') {
-      this.location.D = 'S';
+    if (this.location.direction === Compass.EAST) {
+      this.location.direction = Direction.RIGHT_FROM_EAST;
       return;
     }
-    if (this.location.D === 'S') {
-      this.location.D = 'W';
+    if (this.location.direction === Compass.SOUTH) {
+      this.location.direction = Direction.RIGHT_FROM_SOUTH;
       return;
     }
-    if (this.location.D === 'W') {
-      this.location.D = 'N';
+    if (this.location.direction === Compass.WEST) {
+      this.location.direction = Direction.RIGHT_FROM_WEST;
       return;
     }
   };
 
   moveForward = () => {
-    if (this.location.D === 'N') {
-      this.location.Y = this.location.Y + 1;
+    if (this.location.direction === Compass.NORTH) {
+      this.location.coordinate.Y = this.location.coordinate.Y + 1;
 
-      if (this.location.Y === 100) {
-        this.location.Y = 0;
+      if (this.location.coordinate.Y === this.grid.Y) {
+        this.location.coordinate.Y = 0;
       }
       return;
     }
-    if (this.location.D === 'E') {
-      this.location.X = this.location.X + 1;
-      if (this.location.X === 100) {
-        this.location.X = 0;
+    if (this.location.direction === Compass.EAST) {
+      this.location.coordinate.X = this.location.coordinate.X + 1;
+      if (this.location.coordinate.X === this.grid.X) {
+        this.location.coordinate.X = 0;
       }
       return;
     }
-    if (this.location.D === 'S') {
-      this.location.Y = this.location.Y - 1;
-      if (this.location.Y === -1) {
-        this.location.Y = 99;
+    if (this.location.direction === Compass.SOUTH) {
+      this.location.coordinate.Y = this.location.coordinate.Y - 1;
+      if (this.location.coordinate.Y === -1) {
+        this.location.coordinate.Y = this.grid.Y - 1;
       }
       return;
     }
-    if (this.location.D === 'W') {
-      this.location.X = this.location.X - 1;
-      if (this.location.X === -1) {
-        this.location.X = 99;
+    if (this.location.direction === Compass.WEST) {
+      this.location.coordinate.X = this.location.coordinate.X - 1;
+      if (this.location.coordinate.X === -1) {
+        this.location.coordinate.X = this.grid.X - 1;
       }
       return;
     }
   };
 }
-
-type Location = {
-  X: number;
-  Y: number;
-  D: string;
-};
