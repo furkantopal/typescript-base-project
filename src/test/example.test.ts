@@ -1,8 +1,7 @@
-import { Example } from '../main/example';
+import { calc } from '../main/example';
 
 describe('example test', () => {
-  it('should give sum of a + b when adding a and b', () => {
-    let example: Example = new Example();
-    expect(example.add(1, 2)).toBe(3);
+  it('sum should be 34', () => {
+    expect(calc([1, 2, 3, 4, 5, 6, 7])).toBe(34);
   });
 });
