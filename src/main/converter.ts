@@ -104,7 +104,7 @@ export class Converter {
     let output = '';
     const remainder = input % 1000;
 
-    output = this.xmChecker(input);
+    output = this.cmChecker(input);
 
     if (input >= 1000 && input < 4000) {
       let xCount = (input - remainder) / 1000;
@@ -113,12 +113,12 @@ export class Converter {
         output = output.concat('M');
         xCount--;
       }
-      output = output.concat(this.xmChecker(remainder));
+      output = output.concat(this.cmChecker(remainder));
     }
     return output.concat(this.dChecker(remainder));
   }
 
-  xmChecker(input: number): string {
+  cmChecker(input: number): string {
     let output = '';
     if (input >= 900 && input < 1000) {
       output = 'CM';
