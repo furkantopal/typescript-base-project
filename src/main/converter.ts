@@ -33,7 +33,7 @@ export class Converter {
     let output = '';
     const remainder = input % 10;
 
-    if (input > 9 && input < 40) {
+    if (input >= 10 && input < 40) {
       let xCount = (input - remainder) / 10;
 
       while (xCount > 0) {
@@ -52,7 +52,7 @@ export class Converter {
       output = 'XL';
     }
 
-    if (input > 49 && input < 90) {
+    if (input >= 50 && input < 90) {
       output = 'L';
     }
 
@@ -65,7 +65,7 @@ export class Converter {
 
     output = this.xcChecker(input);
 
-    if (input > 99 && input < 400) {
+    if (input >= 100 && input < 400) {
       let xCount = (input - remainder) / 100;
 
       while (xCount > 0) {
