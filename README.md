@@ -19,3 +19,9 @@ ie: `npm run test:watch example`
 ## Watch All tests
 
 `npm run test:watch-all`
+
+---
+
+# Conways Game of Life Kata
+
+https://katalyst.codurance.com/conways-game-of-life
