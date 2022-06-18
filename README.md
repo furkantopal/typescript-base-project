@@ -19,3 +19,6 @@ ie: `npm run test:watch example`
 ## Watch All tests
 
 `npm run test:watch-all`
+
+# Connascent Mars Rover
+https://github.com/codurance/ts-connascent-mars-rover
