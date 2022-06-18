@@ -19,3 +19,6 @@ ie: `npm run test:watch example`
 ## Watch All tests
 
 `npm run test:watch-all`
+
+# Roman Numerals Kata
+https://katalyst.codurance.com/roman-numerals
