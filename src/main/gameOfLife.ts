@@ -5,11 +5,15 @@ export class GameOfLife {
     this.grid = grid;
   }
 
-  nextGen(): void {
+  public nextGen(): void {
     this.checkGridUnderPopulation();
   }
 
-  checkCellUnderPopulation(cell: [number, number]) {
+  public getGridSituation(): boolean[][] {
+    return this.grid;
+  }
+
+  private checkCellUnderPopulation(cell: [number, number]) {
     let neighboursPopulation: boolean[] = [];
 
     for (let x = cell[0] - 1; x <= cell[0] + 1; x++) {
@@ -25,19 +29,19 @@ export class GameOfLife {
     }
     if (neighboursPopulation.filter(Boolean).length < 2) {
       this.grid[cell[0]][cell[1]] = false;
-      console.log(`${cell[0]} ${cell[1]} is dead`);
+      console.log(`Now [${cell[0]}, ${cell[1]}] is dead due to under-population`);
       neighboursPopulation = [];
     }
   }
 
-  isNeighbourInTheGridBoundaries(x: number, y: number) {
+  private isNeighbourInTheGridBoundaries(x: number, y: number) {
     return x < this.grid[0].length && y < this.grid.length && x >= 0 && y >= 0;
   }
-  isNotTheCellItself(x: number, y: number, cell: [number, number]) {
+  private isNotTheCellItself(x: number, y: number, cell: [number, number]) {
     return x !== cell[0] || y !== cell[1];
   }
 
-  checkGridUnderPopulation() {
+  private checkGridUnderPopulation() {
     for (let x = 0; x < this.grid[0].length; x++) {
       for (let y = 0; y < this.grid.length; y++) {
         if (this.grid[x][y] !== false) {
