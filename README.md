@@ -1,21 +1,21 @@
 ## Install & Run All tests
 
-`npm i`
+`pnpm i`
 
-`npm test`
+`pnpm test`
 
 ## Only run specific Kata unit test
 
-`npm test <name of test>` (per describe block)
+`pnpm test <name of test>` (per describe block)
 
-ie: `npm test example`
+ie: `pnpm test example`
 
 ## Watch a specific Kata unit test
 
-`npm run test:watch <name of test>`
+`pnpm run test:watch <name of test>`
 
-ie: `npm run test:watch example`
+ie: `pnpm run test:watch example`
 
 ## Watch All tests
 
-`npm run test:watch-all`
+`pnpm run test:watch-all`
